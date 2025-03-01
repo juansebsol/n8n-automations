@@ -1,0 +1,793 @@
+{
+  "name": "🫎 Reddit Comment Analyzer v1.0.1",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## ⚠️ Fill this out\n1. Info about your business\n2. Brand name\n3. Number of comments to pull per reddit call",
+        "height": 300,
+        "width": 260,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2960,
+        2180
+      ],
+      "id": "4238ae60-fd5a-471e-9c62-b5afb1e84054",
+      "name": "Sticky Note11"
+    },
+    {
+      "parameters": {
+        "content": "## Search brand name",
+        "height": 300,
+        "width": 280,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2660,
+        2180
+      ],
+      "id": "e2716292-5034-416e-8d86-55ae78d7c168",
+      "name": "Sticky Note12"
+    },
+    {
+      "parameters": {
+        "content": "## Search Misspellings\n\nThis will brainstorm a few misspellings that people might use. Feel free to manually provide the list, or disable this branch altogether.",
+        "height": 500,
+        "width": 800,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -3260,
+        2520
+      ],
+      "id": "8d668675-04a5-407f-8ca8-e1b43bfb2fb2",
+      "name": "Sticky Note13"
+    },
+    {
+      "parameters": {
+        "content": "## Start of funnel\n\nReplace with the trigger of your choice",
+        "height": 300,
+        "width": 260
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -3260,
+        2180
+      ],
+      "id": "74a0935d-0192-44c9-9fb2-49a74c119e7e",
+      "name": "Sticky Note14"
+    },
+    {
+      "parameters": {
+        "content": "## End of funnel",
+        "height": 240,
+        "width": 540,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1980,
+        2520
+      ],
+      "id": "2c8b65c3-5acb-4a11-9ac1-567d67c0e814",
+      "name": "Sticky Note15"
+    },
+    {
+      "parameters": {
+        "content": "## Exclude existing posts\nDon't process comments that have been previously added to the database",
+        "height": 300,
+        "width": 900
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2340,
+        2180
+      ],
+      "id": "44f9363b-a56f-458b-9d84-1ce49a0831fa",
+      "name": "Sticky Note16"
+    },
+    {
+      "parameters": {
+        "content": "## Anazlyze comments\n\nReplace the model with your own choice. No need to connect memory or tools.",
+        "height": 500,
+        "width": 440,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2440,
+        2520
+      ],
+      "id": "ad5546d8-58eb-41c0-b1b6-1291f5763f84",
+      "name": "Sticky Note17"
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"type\": \"object\",\n  \"properties\":{\n    \"relevant\":{\n      \"type\": \"boolean\",\n      \"description\": \"Is this comment/post relevant to the business we own?\"\n    },\n    \"brand_mentioned\":{\n      \"type\": \"boolean\",\n      \"description\": \"Is this brand mentioned in the comment/post?\"\n    },\n    \"sentiment_analysis\":{\n      \"type\": \"string\",\n      \"description\": \"Analyze this comment if it is related to our business.\",\n      \"enum\": [\"Positive\", \"Neutral\", \"Negative\", \"Unrelated\"]\n    },\n    \"emotions\": {\n      \"type\": \"string\",\n      \"description\": \"What emotions did the author express?\"\n    },\n    \"action_recommendation\": {\n      \"type\": \"string\",\n      \"description\": \"How would you recommend that the brand owner address this comment?\"\n    },\n    \"ai_analysis\": {\n      \"type\": \"string\",\n      \"description\": \"One-sentence analysis of this comment.\"\n    }\n  }\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        -2120,
+        2640
+      ],
+      "id": "e2c9ca9d-8127-4aa6-987b-94533961a795",
+      "name": "json schema "
+    },
+    {
+      "parameters": {
+        "content": "# This automation was brought to you by [BundlyAI](https://bundly.ai).\n\nSave thousands of dollars by automating 50% of your business development.\n\n## Get 100 Free credits with code N8N",
+        "height": 240,
+        "width": 540,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1980,
+        2780
+      ],
+      "id": "05779b77-4e90-455f-901c-80aef1b0f99d",
+      "name": "Sticky Note18"
+    },
+    {
+      "parameters": {
+        "content": "## This workfow will analyze reddit comments\n\n### You will need:\n\n1. Reddit API Key\n2. Notion API Key\n3. Notion Database id",
+        "height": 220,
+        "width": 560,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -3260,
+        1920
+      ],
+      "id": "1d5b5fa8-3cec-4c6b-9fc6-4fa33aba5623",
+      "name": "Sticky Note19"
+    },
+    {
+      "parameters": {
+        "content": "### Step 1: Fill out the info about your business \n\n### Step 2: Connect the your Reddit and Notion accounts\n\n### Step 3: Duplicate Notion template and connect it to n8n\n\n### Step 4: Run the automation\n",
+        "height": 220,
+        "width": 560,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2660,
+        1920
+      ],
+      "id": "31bb6c62-b7d0-4e65-8a9d-f7293ce99cdc",
+      "name": "Sticky Note20"
+    },
+    {
+      "parameters": {
+        "content": "### This workflow will analyze each comment and will help you determine:\n\n- if it's relevant to your business\n- what is the emotional sentiment\n- recommended action of addressing the comment\n- AI breakdown of the comment\n\n### The results will be stored and categorized in Notion database",
+        "height": 220,
+        "width": 620,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2060,
+        1920
+      ],
+      "id": "ca895719-7768-4b08-b186-65df283aec5e",
+      "name": "Sticky Note21"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -2300,
+        2900
+      ],
+      "id": "8177ea2f-bed2-4027-ac2d-24e23e4fb2d5",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "hv91qKpVRsk88xLU",
+          "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {}
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -3180,
+        2320
+      ],
+      "id": "81185481-9b48-4553-9879-a9a6ef8bab9d",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "databaseId": {
+          "__rl": true,
+          "value": "1a07bd74-08e1-814f-859a-e5651163cc97",
+          "mode": "list",
+          "cachedResultName": "BRC",
+          "cachedResultUrl": "https://www.notion.so/1a07bd7408e1814f859ae5651163cc97"
+        },
+        "title": "Reddit Comment Analyzer",
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Name|title",
+              "title": "=By /u/{{ $('Merge Reddit Posts').item.json.author }}"
+            },
+            {
+              "key": "Sentiment|select",
+              "selectValue": "={{ $json.output.sentiment_analysis }}"
+            },
+            {
+              "key": "Author Username|url",
+              "urlValue": "=/u/{{ $('Merge Reddit Posts').item.json.author }}"
+            },
+            {
+              "key": "Comment|rich_text",
+              "textContent": "={{ $('Merge Reddit Posts').item.json.selftext.slice(0,1990) }}"
+            },
+            {
+              "key": "Name|title",
+              "title": "=By {{ $('Merge Reddit Posts').item.json.author }} in /r/{{ $('Merge Reddit Posts').item.json.subreddit }}"
+            },
+            {
+              "key": "Post ID|rich_text",
+              "textContent": "={{ $('Merge Reddit Posts').item.json.id }}"
+            },
+            {
+              "key": "Post Title|rich_text",
+              "textContent": "={{ $('Merge Reddit Posts').item.json.title }}"
+            },
+            {
+              "key": "Post URL|url",
+              "urlValue": "=https://reddit.com{{ $('Merge Reddit Posts').item.json.permalink }}"
+            },
+            {
+              "key": "Subreddit|url",
+              "urlValue": "=https://reddit.com/r/{{ $('Merge Reddit Posts').item.json.subreddit }}"
+            },
+            {
+              "key": "Relevant|checkbox",
+              "checkboxValue": "={{ $('analyze').item.json.output.relevant }}"
+            },
+            {
+              "key": "AI Analysis|rich_text",
+              "richText": true,
+              "text": {
+                "text": [
+                  {
+                    "text": "={{ $json.output.ai_analysis }}",
+                    "annotationUi": {}
+                  }
+                ]
+              }
+            },
+            {
+              "key": "Emotions|multi_select",
+              "multiSelectValue": "={{ $json.output.emotions }}"
+            },
+            {
+              "key": "Recommended Actions|rich_text",
+              "richText": true,
+              "text": {
+                "text": [
+                  {
+                    "text": "={{ $json.output.action_recommendation }}",
+                    "annotationUi": {}
+                  }
+                ]
+              }
+            },
+            {
+              "key": "Brand Mentioned|checkbox",
+              "checkboxValue": "={{ $json.output.brand_mentioned }}"
+            },
+            {
+              "key": "Published Time|date",
+              "date": "={{ $('Merge Reddit Posts').item.json.created.toDateTime('s') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        -1760,
+        2580
+      ],
+      "id": "5d56e06b-d09d-468d-b8aa-b9b9e91d6ff2",
+      "name": "Report to Notion",
+      "credentials": {
+        "notionApi": {
+          "id": "Veq3w2fFzZv5tRho",
+          "name": "Ultimate Assistant"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Our business: {{ $('Add Your Info').item.json.about }}\n\nBrand name: {{ $('Add Your Info').item.json.business_name }}\n\nSubreddit:  {{ $json.subreddit }}\n\nPost Title: {{ $json.title }}\n\nComment: {{ $json.selftext }}\n\nUser: {{ $json.author }}\n\nURL: {{ $json.permalink }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=Reply in JSON\n\n\nYou will be given a random comment from Reddit. We are trying to gather all the comments found by the keyword search of the brand name and common misspellings. Your goal is to analyze the reddit data based on the search and print out your sentiment analysis of the comment. We only really care about RELEVANT comments, and more often than not, you will be provided with \n\n\nReturn the following data:\n\nExample 1:\nInput:\nSeamless store opens every time. We provide tailored kitchen equipment services: design, purchasing, project management, and installation. With 40 years of experience, we help brands scale efficiently. Our team empowers emerging, mid-sized, and mature brands to thrive. Concept Services ensures franchises and multi-unit brands open quickly and smoothly. Partner with us to ensure quality and exceptional service.\n\nBrand name: Concept Services\n\nSubreddit:  Serverlife\n\nPost Title: I work at a quick service concept, everyone cooks/cashiers as needed. Ordering is done at a kiosk that prompts for a tip at the end. Discovered today the owner pockets 100% of that money. Legal? (NJ)\n\nComment: \n\nUser: wackjeber\n\nURL: /r/Serverlife/comments/18a4e77/i_work_at_a_quick_service_concept_everyone/\n\nOutput Example 1:\n{\n    \"relevant\": false,\n    \"brand_mentioned?\": false,\n    \"sentiment_analysis\": \"Unrelated\", # choose from \"Positive\", \"Neutral\", \"Negative\" or \"Unrelated\" (if not relevant to our business)\n    \"emotions\": \"Betrayal, Anger\"\n    \"action_recommendation\": \"n/a\",\n    \"ai_analysis\": \"n/a\"\n}\n\nExample 2:   \nOur business: Fetch Rewards App: Shop, snap, and earn gift cards! Available on iOS and Android with 6M+ 5-star reviews. Get points for shopping and games, and redeem for gift cards.\n\nBrand name: Fetch\n\nSubreddit:  FetchReward\n\nPost Title: Fetch is a scam\n\nComment: Had 54,000 pts and went to redeem a $50 Air BnB gift card. Shockingly, I was denied. I inquired about the denial and had a response stating I violated the terms of service and was deducted an arbitrary 43,435 pts. I have never duplicated receipts, altered receipts, etc or anything they may have been implying. It was very discouraging to be denied a gift card after 14 months of passing up store brand merchandise for name brand stuff just for the extra points. I highly advise users to check out other \"cash for receipts\" apps. None of them are perfect, but Fetch is extremely unethical. Anyone else have similar experiences?\n\nUser: rexoo5\n\nURL: /r/FetchReward/comments/18tbray/fetch_is_a_scam/\n\nOutput Example 2:\n{\n    \"relevant\": true,\n    \"brand_mentioned?\": true,\n    \"sentiment_analysis\": \"Negative\",\n    \"emotions\": \"Frustration, Injustice\",\n    \"action_recommendation\": \"Investigate user complaints regarding unfair point deductions and transparency in terms of service.\",\n    \"ai_analysis\": \"The user expresses frustration over being denied a reward after accumulating points over 14 months. They feel betrayed due to an unexplained deduction of a large portion of their points and suspect unethical practices. This dissatisfaction may lead to negative word-of-mouth, impacting brand reputation.\"\n}\n\nReply in this format:\n\n{\n  \"type\": \"object\",\n  \"properties\":{\n    \"relevant\":{\n      \"type\": \"boolean\",\n      \"description\": \"Is this comment/post relevant to the business we own?\"\n    },\n    \"brand_mentioned\":{\n      \"type\": \"boolean\",\n      \"description\": \"Is this brand mentioned in the comment/post?\"\n    },\n    \"sentiment_analysis\":{\n      \"type\": \"string\",\n      \"description\": \"Analyze this comment if it is related to our business.\",\n      \"enum\": [\"Positive\", \"Neutral\", \"Negative\", \"Unrelated\"]\n    },\n    \"emotions\": {\n      \"type\": \"string\",\n      \"description\": \"What emotions did the author express?\"\n    },\n    \"action_recommendation\": {\n      \"type\": \"string\",\n      \"description\": \"How would you recommend that the brand owner address this comment?\"\n    },\n    \"ai_analysis\": {\n      \"type\": \"string\",\n      \"description\": \"One-sentence analysis of this comment.\"\n    }\n  }\n}\n\na note about relevancy: Often times, the brand can be \n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        -2340,
+        2700
+      ],
+      "id": "7a80fc75-b4f1-4cce-9d9e-4b8c9c56b2cb",
+      "name": "analyze",
+      "retryOnFail": false,
+      "alwaysOutputData": true,
+      "maxTries": 5,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "location": "allReddit",
+        "keyword": "={{ $json[\"output.other_names_and_misspellings\"] }}",
+        "returnAll": true,
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.reddit",
+      "typeVersion": 1,
+      "position": [
+        -2660,
+        2820
+      ],
+      "id": "5dd264c4-6596-4406-b906-98cda2032a8b",
+      "name": "iterate_on_misspellings",
+      "credentials": {
+        "redditOAuth2Api": {
+          "id": "kBQYof6nSyTZ83Bc",
+          "name": "Reddit account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -2680,
+        2620
+      ],
+      "id": "04383dd1-5d0a-4664-8384-2831fe46bfe4",
+      "name": "Loop Over Misspellings"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "output.other_names_and_misspellings",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -2880,
+        2720
+      ],
+      "id": "7532cb4f-6bec-4ff2-bf43-4505aaa037dd",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Write {{ $json.misspellings }} alternative names or most likely misspellings of the brand name",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=Write {{ $json.misspellings }} alternative names or most likely misspellings of the brand name\n\nBusiness Name:  {{ $json.business_name }}\n\nAbout our Business: {{ $json.about }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        -3200,
+        2820
+      ],
+      "id": "130c8372-639f-45fe-a59a-3eb13ef1efc0",
+      "name": "misspellings"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "advanced": true,
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "property_post_id",
+              "field2": "id"
+            }
+          ]
+        },
+        "joinMode": "keepNonMatches",
+        "outputDataFrom": "input2",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        -1620,
+        2300
+      ],
+      "id": "e1db38a9-db93-47f1-aeef-5fa5f0b26cf0",
+      "name": "Exclude Existing"
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "getAll",
+        "databaseId": {
+          "__rl": true,
+          "value": "1a07bd74-08e1-814f-859a-e5651163cc97",
+          "mode": "list",
+          "cachedResultName": "BRC",
+          "cachedResultUrl": "https://www.notion.so/1a07bd7408e1814f859ae5651163cc97"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        -1960,
+        2260
+      ],
+      "id": "78f09193-d6d6-4165-a85b-9cf9fc235543",
+      "name": "search for existing",
+      "alwaysOutputData": true,
+      "credentials": {
+        "notionApi": {
+          "id": "Veq3w2fFzZv5tRho",
+          "name": "Ultimate Assistant"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        -2280,
+        2300
+      ],
+      "id": "e8aee646-bb9e-4cd0-ae64-134c32b85bde",
+      "name": "Merge Reddit Posts"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "location": "allReddit",
+        "keyword": "={{ $json.business_name }}",
+        "returnAll": true,
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.reddit",
+      "typeVersion": 1,
+      "position": [
+        -2580,
+        2320
+      ],
+      "id": "a6fd80d0-221f-4046-ac57-fa9eb1086307",
+      "name": "search brand name",
+      "credentials": {
+        "redditOAuth2Api": {
+          "id": "kBQYof6nSyTZ83Bc",
+          "name": "Reddit account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d0dca9d1-7495-4cde-92b6-0a558d4c8325",
+              "name": "about",
+              "value": "=⚠️ INFO ABOUT YOUR BUSINESS HERE ⚠️",
+              "type": "string"
+            },
+            {
+              "id": "538d9717-0f89-4d04-9fb2-8a0aa54735b4",
+              "name": "business_name",
+              "value": "⚠️ BRAND NAME HERE ⚠️",
+              "type": "string"
+            },
+            {
+              "id": "0ace755a-9900-4e69-b2fe-ef1114f1be6e",
+              "name": "limit",
+              "value": 5,
+              "type": "number"
+            },
+            {
+              "id": "9ef6b79c-f9d3-441c-bed4-70507bec8593",
+              "name": "misspellings",
+              "value": 5,
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2880,
+        2320
+      ],
+      "id": "eedadaf8-1f33-48f9-a80b-cb6163fc19cc",
+      "name": "Add Your Info"
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n\t\"type\": \"object\",\n\t\"properties\": {\n\t\t\"other_names_and_misspellings\": {\n\t\t\t\"type\": \"array\",\n\t\t\t\"items\": {\n\t\t\t\t\"type\": \"string\"\n\t\t\t}\n\t\t}\n\t}\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        -3020,
+        2780
+      ],
+      "id": "faadc4cb-0a6d-4084-9c00-412800c57035",
+      "name": "json schema"
+    },
+    {
+      "parameters": {
+        "content": "# Need help setting this up?\n\n## Hey! I'm Ian, the developer on Bundly.ai and the creator of this workflow. \n## If you find this workflow too hard or need to make custom modifications - I can help you with this over a private consulting call.\n\n## Ping me at ian@bundly.ai if you need help.",
+        "height": 240,
+        "width": 1820
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -3260,
+        1660
+      ],
+      "id": "8dde3189-2d3e-4770-9e43-21eeacc1efba",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "json schema ": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "analyze",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "analyze",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "misspellings",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Add Your Info",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "analyze": {
+      "main": [
+        [
+          {
+            "node": "Report to Notion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "iterate_on_misspellings": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Misspellings",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Misspellings": {
+      "main": [
+        [
+          {
+            "node": "Merge Reddit Posts",
+            "type": "main",
+            "index": 1
+          }
+        ],
+        [
+          {
+            "node": "iterate_on_misspellings",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Misspellings",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "misspellings": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Exclude Existing": {
+      "main": [
+        [
+          {
+            "node": "analyze",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "search for existing": {
+      "main": [
+        [
+          {
+            "node": "Exclude Existing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Reddit Posts": {
+      "main": [
+        [
+          {
+            "node": "Exclude Existing",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "search brand name": {
+      "main": [
+        [
+          {
+            "node": "Merge Reddit Posts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Your Info": {
+      "main": [
+        [
+          {
+            "node": "search brand name",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "misspellings",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "search for existing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "json schema": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "misspellings",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "6b77723d-419f-407d-8114-45732a6365a3",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c468f3e9ec76d6a999f2a3139e7b38fe14df5109932c20629efadf9cb993c0f1"
+  },
+  "id": "kIRtVsvd41IrfAPG",
+  "tags": [
+    {
+      "createdAt": "2025-02-16T14:41:35.749Z",
+      "updatedAt": "2025-02-16T14:41:35.749Z",
+      "id": "hAlbToCdgae0JKMP",
+      "name": "Bundly Automations"
+    }
+  ]
+}
